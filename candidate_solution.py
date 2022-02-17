@@ -61,13 +61,10 @@ class Program:
         """
         construct a random tree representing a Programm instance using the Terminals and Operators defined in <config> dictionary
         """
-        self.config = config
-        self.root = Node(self.config)
+        self.root = Node(config)
 
     def __str__(self) -> str:
         """recursive string method is implemented in Node class"""
-        if self.root is None:
-            return "()"
         return self.root.rec_str()
 
     def eval(self, env: Dict) -> float:
@@ -83,7 +80,6 @@ if __name__ == "__main__":
             [lambda a, b: a - b, "-"],
             [lambda a, b: a * b, "*"],
             [lambda a, b: a / b if b != 0 else 99999999, "/"],
-            [lambda a, b: a ** b, "^"],
         ],
         "Terminals": ["uv", 1, 2],
     }
