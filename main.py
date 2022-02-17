@@ -1,8 +1,7 @@
 import typing
 import numpy as np
 from matplotlib import pyplot as plt
-import candidate_solution 
-
+import candidate_solution
 
 
 class Testcase:
@@ -28,8 +27,6 @@ class Testcase:
 
 
 if __name__ == "__main__":
-
-
 
     tc = Testcase(lambda x: x * x, -10, 10, 20, 100)
     tc.draw("test.png")
