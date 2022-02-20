@@ -1,7 +1,7 @@
 import typing
 import numpy as np
 from matplotlib import pyplot as plt
-import candidate_solution
+import programm
 
 
 class Testcase:
@@ -22,7 +22,7 @@ class Testcase:
         ax.scatter(self.X, self.Y)
         fig.savefig(f"{filename}.png")
 
-    def compute_fitness(program: candidate_solution.Program):
+    def compute_fitness(program: programm.Program):
         pass
 
 

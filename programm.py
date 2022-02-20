@@ -1,5 +1,10 @@
+import numpy as np
+from matplotlib import pyplot as plt
 from typing import Dict
 from random import choice, random
+# remove after testing:
+from cmath import e
+from math import pi
 
 
 class Node:
@@ -71,6 +76,30 @@ class Program:
         """recursive evaluation method is implemented in Node class"""
         return self.root.rec_eval(env)
 
+    def plot2d(self, envs: list[Dict], filename: str) -> None:
+        """plot programm and save output as filename.png, takes an array of dicts which maps one independent variable to an x value"""
+        fig, ax = plt.subplots()
+        X, Y = np.zeros(len(envs)), np.zeros(len(envs)) # float 64 dtype
+
+        for idx, env in enumerate(envs):
+            assert len(env) == 1
+            for _, val in env.items():
+                X[idx] = val
+                Y[idx] = self.eval(env)
+
+        ax.plot(X, Y)
+        fig.savefig(f"{filename}.png")
+
+
+    def make_envs(uv_min, uv_max, uv_name) -> list[Dict]:
+        """static helper function to construct an array of environment mappings for independent variable"""
+        envs = []
+
+        for val in range(uv_min, uv_max):
+            envs.append(
+                {uv_name: val}
+            )
+        return envs
 
 if __name__ == "__main__":
 
@@ -81,11 +110,14 @@ if __name__ == "__main__":
             [lambda a, b: a * b, "*"],
             [lambda a, b: a / b if b != 0 else 99999999, "/"],
         ],
-        "Terminals": ["uv", 1, 2],
+        "Terminals": ["uv", pi, e],
     }
 
-    env = {"uv": 2}
 
     p = Program(conf)
     print(p)
-    print(p.eval(env))
+    p.plot2d(
+        Program.make_envs(-100, 100, "uv"),
+        "pplot"
+    )
+
