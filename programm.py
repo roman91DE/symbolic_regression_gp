@@ -18,6 +18,7 @@ class Node:
                 self.leftchild = Node(config)
                 self.righchild = Node(config)
             except KeyError:
+                print("Key Error occured during Node construction - Check config")
                 raise KeyError
         else:
             # pick a terminal
